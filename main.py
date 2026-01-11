@@ -2,7 +2,7 @@ import asyncio
 from live.datafeed_async import DataFeedAsync
 from live.trader_async import TraderAsync
 from strategy.strategy import Strategy
-from risk.risk_manager import RiskManager
+from risk.risk_manager import RiskManager, can_trade
 from risk.position_sizer import PositionSizer
 from risk.daily_guard import DailyGuard
 from logs.trade_logger import TradeLogger
@@ -40,7 +40,7 @@ async def main():
       notifier.send(f"Entered {signal} @ {price}")
 
 
-  feed = DataFeedAsync(SYMBOL, on_candles)
+  feed = DataFeedAsync(SYMBOL, can_trade)
   await feed.start()
 
 asyncio.run(main())
